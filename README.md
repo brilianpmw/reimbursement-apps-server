@@ -1,81 +1,135 @@
 # reimbursement-apps-server
 
+##Table of content :
 
+- [Api flow](#Api-Flow)
+
+- [ Api Docs](#Api-Docs)
+     - [ Main concept Api](#main-concept-)
 
 
 ## Apps Flow 
 
 
-**Add Role** : 
+- **Add Role** : 
 
-[Login as super admin](#login-user) ->  [create role](#Add-new-role)  -> done
-
-
-**Add Departement** : 
-
-[Login as super admin](#login-user) ->  [create departement](#Add-new-departement) -> done
-
-**create user** : 
-
-[Login as super admin ](#login-user) -> [get role](#get-list-role) and [get departement](#get-list-departement)  -> [create user](#Add-new-user)  -> done
-
-**Update user** : 
-
-[Login as super admin ](#login-user) -> [get list user](#get-list-user )-> [update user](#Edit-user)  -> done
+     [Login as super admin](#login-user) ->  [create role](#Add-new-role)  -> done
 
 
-**Create a new wallet by superadmin** : 
+- **Add Departement** : 
+          
+     [Login as super admin](#login-user) ->  [create departement](#Add-new-departement) -> done
 
-[login as superadmin](#login-user) ->  create wallet -> done
+- **create user** : 
 
-**update wallet by superadmin** : 
+     [Login as super admin ](#login-user) -> [get role](#get-list-role) and [get departement](#get-list-departement)  -> [create user](#Add-new-user)  -> done
 
-[login as superadmin](#login-user) ->  get list wallet -> update wallet -> done
+- **Update user** : 
+
+     [Login as super admin ](#login-user) -> [get list user](#get-list-user )-> [update user](#Edit-user)  -> done
 
 
-**Create a new transaction by staff** : 
+- **Create a new wallet by superadmin** : 
 
-[create user](#Add-new-user) -> [Login user](#login-user)-> create Transaction -> done
+     [login as superadmin](#login-user) ->  [create wallet](#create-wallet) -> done
 
-**Create a new transaction by SuperAdmin** :
+- **update wallet by superadmin** : 
 
-[Login as super admin ](#login-user) -> create Transaction (can with 0 value) -> done
+     [login as superadmin](#login-user) ->  [get list wallet](#get-list-wallet) -> update wallet -> done
+
+
+- **Create a new transaction by staff** : 
+
+     [create user](#Add-new-user) -> [Login user](#login-user)-> [create Transaction](#create-transaction) -> done
+
+- **Create a new transaction by SuperAdmin** :
+
+     [Login as super admin ](#login-user) -> [create Transaction (can with 0 value)](#create-transaction) -> done
 
 
 ```diff
 - note : Approval can be update by admin or superadmin
 ```
 
-**edit  transaction  super admin by staff** : 
+- **edit  transaction  super admin by staff** : 
 
 
-[Login as staff ](#login-user) -> get list transaction -> [update price data](#Edit-Transacion-or-approval) -> done  
+     [Login as staff ](#login-user) -> [get list transaction](#get-list-transaction) -> [update price data](#Edit-Transacion-or-approval) -> done  
 
-**Approval by admin** : 
+- **Approval by admin** : 
 
-[Login as admin ](#login-user) -> get transaction list  ->[update status approval only](#Edit-Transacion-or-approval)
+     [Login as admin ](#login-user) ->[get list transaction](#get-list-transaction)  ->[update status approval only](#Edit-Transacion-or-approval)
 
-**Approval by super admin** : 
+- **Approval by super admin** : 
 
-[Login as super admin ](#login-user) -> get transaction list  ->[update status approval or change data transaction](#Edit-Transacion-or-approval) 
+     [Login as super admin ](#login-user) ->[get list transaction](#get-list-transaction)  ->[update status approval or change data transaction](#Edit-Transacion-or-approval) 
 
-**Limitation list transaction by super admin** : 
+- **Limitation list transaction by super admin** : 
 
-[Login as super admin ](#login-user)  -> [update visibility transaction date admin](#Edit-Visibility-Transaction)
-
-
-
-**update outdate approval  : 
+     [Login as super admin ](#login-user)  -> [update visibility transaction date admin](#Edit-Visibility-Transaction)
 
 
-[Login as super admin ](#login-user)    -> [Edit Outdate Approval](#Edit-Outdate-Approval)
+
+- **update outdate approval  : 
+
+
+     [Login as super admin ](#login-user)    -> [Edit Outdate Approval](#Edit-Outdate-Approval)
 
 
 
 
 ## Api Docs 
 
+### main concept : 
 
+- [get list data ](#get-list-data)
+- [limitation and page](#limitation-and-page)
+- [get detail/single data ](#get-detail-or-single-data)
+- [Update data](#update-data)
+- [delete ](#delete-data)
+
+
+#### get list data
+get list data = method : GET -> baseurl+endpoint
+
+example : 
+```
+GET localhost:3000/user -> will give response user list, in array of object
+```
+
+#### limitation and page  
+```
+not required 
+default limit : 10 
+default page : 1
+
+use limit example 
+http://localhost:3002/user?page=1&limit=10000
+
+```
+#### get detail or single data
+get list data = method : GET -> baseurl+endpoint+/:id
+
+example : 
+```
+GET localhost:3000/user/xaka1291j2kadawd -> will give response user detail data in single object data
+```
+
+#### Update data
+update list data = method : PUT -> baseurl+endpoint+/:id
+
+example : 
+```
+PUT localhost:3000/user/xaka1291j2kadawd -> will updating data with id in params
+```
+
+#### Delete data
+Delete list data = method : Delete -> baseurl+endpoint+/:id
+
+example : 
+```
+DELETE localhost:3000/user/xaka1291j2kadawd -> will deleting data with id in params
+```
 
 
 ### BASIC AUTH
@@ -213,6 +267,66 @@ response when  success
     }
     ]
 }
+```
+
+### get list transaction 
+
+endpoint : /transaction<br>
+method : GET<br>
+
+
+
+response when  success
+```javascript
+loading
+```
+
+### get list wallet 
+
+endpoint : /wallet<br>
+method : GET<br>
+
+
+
+response when  success
+```javascript
+loading
+```
+
+### create transaction 
+
+endpoint : /transaction<br>
+method : POST<br>
+
+request : 
+```javascript
+
+loading
+```
+
+
+
+response when  success
+```javascript
+loading
+```
+
+### create wallet 
+
+endpoint : /wallet<br>
+method : POST<br>
+
+request : 
+```javascript
+
+loading
+```
+
+
+
+response when  success
+```javascript
+loading
 ```
 
 ### get list role 
