@@ -1,80 +1,84 @@
 # reimbursement-apps-server
 
-### Description
-
-(APIX) -> X is a number
-
-the code will be an ID for some API 
 
 
-### Apps Flow 
+
+## Apps Flow 
 
 
 **Add Role** : 
-```
-Login as Super Admin (API0) ->  create role (API1) -> done
-```
+
+[Login as super admin](#login-user) ->  [create role](#Add-new-role)  -> done
+
 
 **Add Departement** : 
-```
-Login as Super Admin (API0) ->  create departement (API2)-> done
-```
+
+[Login as super admin](#login-user) ->  [create departement](#Add-new-departement) -> done
+
 **create user** : 
-```
-Login as Super Admin (API0)-> get department and role list (API3) -> create user (API4) -> done
-```
+
+[Login as super admin ](#login-user) -> [get role](#get-list-role) and [get departement](#get-list-departement)  -> [create user](#Add-new-user)  -> done
+
+**Update user** : 
+
+[Login as super admin ](#login-user) -> [get list user](#get-list-user )-> [update user](#Edit-user)  -> done
+
+
+**Create a new wallet by superadmin** : 
+
+[login as superadmin](#login-user) ->  create wallet -> done
+
+**update wallet by superadmin** : 
+
+[login as superadmin](#login-user) ->  get list wallet -> update wallet -> done
+
 
 **Create a new transaction by staff** : 
 
-```
-Create User (by super admin)(API4) -> Login User (API0)-> create Transaction (API5)-> done
-```
+[create user](#Add-new-user) -> [Login user](#login-user)-> create Transaction -> done
+
 **Create a new transaction by SuperAdmin** :
 
-```
-Login Super admin -> create Transaction (can with 0 value) -> done
-```
+[Login as super admin ](#login-user) -> create Transaction (can with 0 value) -> done
+
 
 ```diff
 - note : Approval can be update by admin or superadmin
 ```
 
 **edit  transaction  super admin by staff** : 
-```
 
-Login as staff  -> select transaction -> update the data -> done  
 
-```
+[Login as staff ](#login-user) -> get list transaction -> [update price data](#Edit-Transacion-or-approval) -> done  
 
 **Approval by admin** : 
-```
-Login as admin -> get transaction list -> choose transaction -> update status approval only
-```
+
+[Login as admin ](#login-user) -> get transaction list  ->[update status approval only](#Edit-Transacion-or-approval)
+
 **Approval by super admin** : 
-```
-Login as admin -> get transaction list -> choose transaction -> update status approval or change data transaction
-```
+
+[Login as super admin ](#login-user) -> get transaction list  ->[update status approval or change data transaction](#Edit-Transacion-or-approval) 
+
 **Limitation list transaction by super admin** : 
-```
 
-Login as super admin  -> choose date range -> update visibility transaction date admin
+[Login as super admin ](#login-user)  -> [update visibility transaction date admin](#Edit-Visibility-Transaction)
 
-```
+
 
 **update outdate approval  : 
-```
-
-Login as super admin  -> input number  -> Edit Outdate Approval
-
-```
 
 
-### Api Docs 
+[Login as super admin ](#login-user)    -> [Edit Outdate Approval](#Edit-Outdate-Approval)
 
 
 
 
-#### BASIC AUTH
+## Api Docs 
+
+
+
+
+### BASIC AUTH
 for security reason please use header : 
 
 ```javascript
@@ -105,7 +109,9 @@ response when unauthorize
 }
 ```
 
-#### login user (API0)
+
+
+### login user
 
 endpoint : /user/login<br>
 method : POST<br>
@@ -148,7 +154,176 @@ response when wrong password :
 }
 ```
 
-#### Add new user (API4)
+### Add new departement 
+
+endpoint : /departement<br>
+method : POST<br>
+request : 
+```javascript
+
+body : {
+  departement_name : finance
+}
+```
+
+
+response when  success
+```javascript
+{
+    "success": true,
+    "status": 200,
+    "data": {
+        "departement_name": "finance",
+        "modified_at": null,
+        "is_delete": false,
+        "_id": "6051d94767ef28cd156fe96d",
+        "created_at": "2021-03-17T10:26:15.695Z",
+        "__v": 0
+    }
+}
+```
+### get list departement 
+
+endpoint : /departement<br>
+method : GET<br>
+
+
+
+response when  success
+```javascript
+{
+    "success": true,
+    "status": 200,
+    "data": [
+    {
+        "departement_name": "finance",
+        "modified_at": null,
+        "is_delete": false,
+        "_id": "6051d94767ef28cd156fe96d",
+        "created_at": "2021-03-17T10:26:15.695Z",
+        "__v": 0
+    },
+    {
+        "departement_name": "finance",
+        "modified_at": null,
+        "is_delete": false,
+        "_id": "6051d94767ef28cd156fe96d",
+        "created_at": "2021-03-17T10:26:15.695Z",
+        "__v": 0
+    }
+    ]
+}
+```
+
+### get list role 
+
+endpoint : /role<br>
+method : GET<br>
+
+
+
+response when  success
+```javascript
+{
+    "success": true,
+    "status": 200,
+    "data": [
+    {
+        "role_name": "admin",
+        "modified_at": null,
+        "is_delete": false,
+        "_id": "6051d94767ef28cd156fe96d",
+        "created_at": "2021-03-17T10:26:15.695Z",
+        "__v": 0
+    },
+    {
+        "role_name": "super admin",
+        "modified_at": null,
+        "is_delete": false,
+        "_id": "6051d94767ef28cd156fe96d",
+        "created_at": "2021-03-17T10:26:15.695Z",
+        "__v": 0
+    }
+    ]
+}
+```
+
+
+### get list user 
+
+endpoint : /user<br>
+method : GET<br>
+
+
+
+response when  success
+```javascript
+{
+    "success": true,
+    "status": 200,
+    "data": [
+    {
+     username:'brilian',
+     password : '123',
+     departement_id : 605057a2e9cda1f66fe21b03,
+     role_id : [605057a2e9cda1f66fxxxx],
+     wallet_id : [605057a2e9cda1f66fxxxx],
+     budget : '1000'
+     "modified_at": null,
+     "is_delete": false,
+     "_id": "6051d94767ef28cd156fe96d",
+     "created_at": "2021-03-17T10:26:15.695Z",
+     "__v": 0
+    },
+    {
+      username:'brilianti',
+     password : '123',
+     departement_id : 605057a2e9cda1f66fe21b03,
+     role_id : [605057a2e9cda1f66fxxxx,605057a2e9cda1f66fxxxx,605057a2e9cda1f66fxxxx],
+     wallet_id : [605057a2e9cda1f66fxxxx,605057a2e9cda1f66fxxxx],
+     budget : '1000'
+     "modified_at": null,
+     "is_delete": false,
+     "_id": "6051d94767ef28cd156fe96d",
+     "created_at": "2021-03-17T10:26:15.695Z",
+     "__v": 0
+    }
+    ]
+}
+```
+
+
+### Add new role 
+
+endpoint : /role<br>
+method : POST<br>
+request : 
+```javascript
+
+body : {
+  role_name : admin
+}
+```
+
+
+response when  success
+```javascript
+{
+    "success": true,
+    "status": 200,
+    "data": {
+        "role_name": "admin",
+        "modified_at": null,
+        "is_delete": false,
+        "_id": "6051d94767ef28cd156fe96d",
+        "created_at": "2021-03-17T10:26:15.695Z",
+        "__v": 0
+    }
+}
+```
+
+
+### Add new user 
 
 endpoint : /user<br>
 method : POST<br>
@@ -160,16 +335,15 @@ body : {
   password : '123',
   departement_id : 605057a2e9cda1f66fe21b03,
   role_id : [605057a2e9cda1f66fxxxx],
+  wallet_id : [605057a2e9cda1f66fxxxx],
   budget : '1000'
 }
 ```
 
 ```diff
-- note : role_id : type Array, 1 user can have more than 1 role_id
+- note : role_id & wallet : type Array, 1 user can have more than 1 role_id and wallet_id
 
 ```
-
-
 
 response when username has been taken
 ```javascript
@@ -200,7 +374,7 @@ response when success
 }
 ```
 
-#### Edit user
+### Edit user
 endpoint : /user/:id<br>
 method : PUT<br>
 
@@ -233,7 +407,7 @@ will update username and role_id
 
 
 
-#### Edit Visibility Transaction 
+### Edit Visibility Transaction 
 endpoint : /role/setvisibility/:id<br>
 method : PUT<br>
 
@@ -260,7 +434,7 @@ example response success :
 }
 ```
 
-#### Edit Outdate Approval
+### Edit Outdate Approval
 endpoint : /role/setoutdate/:id<br>
 method : PUT<br>
 
@@ -290,7 +464,7 @@ example response success :
 
 
 
-#### Edit Transacion / approval
+### Edit Transacion or approval
 endpoint : /transaction/:id<br>
 method : PUT<br>
 
